@@ -194,7 +194,7 @@ export default function Header() {
                           navigate('/admin');
                         }}
                       >
-                        Quản lí
+                        Quản lý
                       </li>
                     )}
                     <li
