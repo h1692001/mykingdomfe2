@@ -309,7 +309,11 @@ export default function AllProduct() {
 
               <div className="flex flex-wrap gap-[20px]">
                 {sortedProduct?.map((dt) => {
-                  return <ProductCard dt={dt}></ProductCard>;
+                  return (
+                    <div style={{ width: '300px' }}>
+                      <ProductCard dt={dt}></ProductCard>
+                    </div>
+                  );
                 })}
               </div>
             </div>

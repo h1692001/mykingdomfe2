@@ -8,6 +8,10 @@ const CategoryApi = {
     const url = '/category';
     return axiosClients.post(url, data);
   },
+  updateCategory: (data) => {
+    const url = '/category';
+    return axiosClients.put(url, data);
+  },
 };
 
 export default CategoryApi;

@@ -198,8 +198,34 @@ const ManageBrand = () => {
             </Spin>
         </Modal>
 
-        <Modal title="Edit brand" open={isModalOpenEdit} onOk={() => {
+        <Modal title="Sửa thông tin nhãn hàng" open={isModalOpenEdit} onOk={async () => {
+            try {
+                const formData = new FormData();
+                formData.append('logo', editProduct.logo);
+                formData.append('name', editProduct.name);
+                formData.append('comeFrom', editProduct.comeFrom);
+                formData.append('category', editProduct.category);
+                formData.append("id", editProduct.id);
 
+                setIsLoading(true);
+                await BrandApi.updateBrand(formData);
+                setIsLoading(false);
+                fetchData();
+                setIsModalOpenEdit(false);
+                setEditProduct({
+                    logo: null,
+                    name: '',
+                    comeFrom: '',
+                    category: "",
+                });
+
+                const fileInput = document.getElementById('logoInput');
+                fileInput.value = '';
+                fileInput.type = 'file';
+            }
+            catch (e) {
+
+            }
         }} onCancel={() => { setIsModalOpenEdit(false) }}>
             <Spin spinning={isLoading}>
                 <div style={{ marginTop: '20px' }}>
@@ -207,21 +233,21 @@ const ManageBrand = () => {
                     <input
                         type='file'
                         id="logoInput"
-                        onChange={(e) => setNewBrand({ ...newBrand, logo: e.target.files[0] })}
+                        onChange={(e) => setEditProduct({ ...editProduct, logo: e.target.files[0] })}
                     />
                 </div>
                 <div style={{ marginTop: '20px' }}>
                     <p style={{ marginBottom: '10px', fontWeight: '500', fontSize: '16px' }}>Brand's name</p>
                     <Input
-                        value={newBrand.name}
-                        onChange={(e) => setNewBrand({ ...newBrand, name: e.target.value })}
+                        value={editProduct.name}
+                        onChange={(e) => setEditProduct({ ...editProduct, name: e.target.value })}
                     />
                 </div>
                 <div style={{ marginTop: '20px' }}>
                     <p style={{ marginBottom: '10px', fontWeight: '500', fontSize: '16px' }}>Come from</p>
                     <Input
-                        value={newBrand.comeFrom}
-                        onChange={(e) => setNewBrand({ ...newBrand, comeFrom: e.target.value })}
+                        value={editProduct.comeFrom}
+                        onChange={(e) => setEditProduct({ ...editProduct, comeFrom: e.target.value })}
                     />
                 </div>
 
@@ -231,7 +257,7 @@ const ManageBrand = () => {
                         showSearch
                         placeholder="Select a category"
                         optionFilterProp="children"
-                        onChange={onChange}
+                        onChange={(value) => { setEditProduct({ ...editProduct, category: value }); }}
                         onSearch={onSearch}
                         filterOption={filterOption}
                         options={category}

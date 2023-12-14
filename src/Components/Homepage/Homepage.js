@@ -10,11 +10,11 @@ import Footer from '../../Containers/Footer/Footer';
 import CategoryApi from '../../api/CategoryApi';
 import { useEffect, useState } from 'react';
 import { Carousel } from 'antd';
-import banner1 from '../../Assets/banner/1.png';
-import banner2 from '../../Assets/banner/2.png';
-import banner3 from '../../Assets/banner/3.png';
-import banner4 from '../../Assets/banner/4.png';
-import banner5 from '../../Assets/banner/5.png';
+import banner1 from '../../Assets/banner/1.jpg';
+import banner2 from '../../Assets/banner/2.jpg';
+import banner3 from '../../Assets/banner/3.jpg';
+import banner4 from '../../Assets/banner/4.jpg';
+import banner5 from '../../Assets/banner/5.jpg';
 import banner6 from '../../Assets/banner/6.jpg';
 import { useSelector } from 'react-redux';
 

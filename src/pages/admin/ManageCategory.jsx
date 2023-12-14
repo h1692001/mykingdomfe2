@@ -5,41 +5,14 @@ import { Space, Table, Spin, Button, Modal, Input } from 'antd';
 import Swal from 'sweetalert2';
 const { Header } = Layout;
 
-const columns = [
-    {
-        title: 'Logo',
-        dataIndex: 'image',
-        key: 'image',
-        render: (text) => <img src={text} style={{
-            width: '108px',
-            height: "54px",
-            objectFit: 'cover'
-        }} alt='logo'></img>,
-    },
-    {
-        title: 'Tên danh mục',
-        dataIndex: 'name',
-        key: 'name',
-        render: (text) => <p>{text}</p>,
-    },
-    {
-        title: '',
-        key: 'action',
-        render: (_, record) => (
-            <Space size="middle">
-                <Button type="primary" style={{
-                    backgroundColor: "green !important"
-                }}>Chỉnh sửa</Button>
-            </Space>
-        ),
-    },
-];
+
 
 const ManageCategory = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [data, setData] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
-
+    const [isModalEditOpen, setIsModalEditOpen] = useState(false);
+    const [editData, setEditData] = useState({});
     const [newCategory, setNewCategory] = useState({
         name: '',
     });
@@ -64,6 +37,37 @@ const ManageCategory = () => {
             setIsLoading(false);
         }
     }
+
+    const columns = [
+        {
+            title: 'Logo',
+            dataIndex: 'image',
+            key: 'image',
+            render: (text) => <img src={text} style={{
+                width: '108px',
+                height: "54px",
+                objectFit: 'cover'
+            }} alt='logo'></img>,
+        },
+        {
+            title: 'Tên danh mục',
+            dataIndex: 'name',
+            key: 'name',
+            render: (text) => <p>{text}</p>,
+        },
+        {
+            title: '',
+            key: 'action',
+            render: (_, record) => (
+                <Space size="middle">
+                    <Button type="primary" style={{
+                        backgroundColor: "green !important"
+                    }}
+                        onClick={() => { setIsModalEditOpen(true); setEditData(record) }}>Chỉnh sửa</Button>
+                </Space>
+            ),
+        },
+    ];
 
     const createBrand = async () => {
         try {
@@ -130,6 +134,44 @@ const ManageCategory = () => {
                     <Input
                         value={newCategory.name}
                         onChange={(e) => setNewCategory({ ...newCategory, name: e.target.value })}
+                    />
+                </div>
+
+            </Spin>
+        </Modal>
+        <Modal title="Sửa danh mục" open={isModalEditOpen} onOk={async () => {
+            try {
+                setIsLoading(true);
+                const formData = new FormData();
+                formData.append('logo', editData.logo);
+                formData.append('name', editData.name);
+                formData.append("id", editData.id);
+                await CategoryApi.updateCategory(formData);
+                setIsLoading(false);
+                fetchData();
+                setIsModalEditOpen(false);
+                setEditData({
+                });
+            } catch (e) {
+                setIsLoading(false);
+            }
+        }} onCancel={() => { setIsModalEditOpen(false) }}>
+            <Spin spinning={isLoading}>
+
+                <div style={{ marginTop: '20px' }}>
+                    <p style={{ marginBottom: '10px', fontWeight: '500', fontSize: '16px' }}>Logo</p>
+                    <input
+                        type='file'
+                        id="logoInput"
+                        onChange={(e) => setEditData({ ...editData, logo: e.target.files[0] })}
+                    />
+                </div>
+
+                <div style={{ marginTop: '20px' }}>
+                    <p style={{ marginBottom: '10px', fontWeight: '500', fontSize: '16px' }}>Tên danh mục</p>
+                    <Input
+                        value={editData.name}
+                        onChange={(e) => setEditData({ ...editData, name: e.target.value })}
                     />
                 </div>
 

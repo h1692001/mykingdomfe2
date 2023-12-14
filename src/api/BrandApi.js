@@ -12,6 +12,14 @@ const BrandApi = {
       },
     });
   },
+  updateBrand: (data) => {
+    const url = '/brand';
+    return axiosClients.put(url, data, {
+      headers: {
+        'content-type': 'form-data',
+      },
+    });
+  },
 };
 
 export default BrandApi;
