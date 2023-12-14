@@ -1,0 +1,56 @@
+.SpecialSale_Container {
+  width: 100%;
+  .SpecialSale {
+    width: 1330px;
+    margin: 0 auto;
+    .SpecialSale_Product {
+      .SpecialSale_ProductItem {
+        height: 434px !important;
+        width: 300px !important;
+        border: 1px solid #ccc;
+        overflow: hidden;
+        .SpecialSale_ProductItem_Image {
+          height: 313px;
+          width: 313px;
+          background-position: center center;
+          background-repeat: no-repeat;
+          background-size: contain;
+        }
+        .SpecialSale_ProductItem_NameProduct {
+          color: #444;
+          font-weight: 600;
+          font-size: 16px;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+
+          &:hover {
+            color: #df494a;
+            transition: 0.5s;
+            cursor: pointer;
+          }
+        }
+        .SpecialSale_ProductItem_ProductCode {
+          font-size: 10px;
+          color: #ccc;
+          margin-top: 6px;
+        }
+        .SpecialSale_ProductItem_Price {
+          color: #df494a;
+          font-size: 16px;
+          font-weight: 700;
+        }
+      }
+    }
+  }
+}
+.slick-slide > div {
+  margin: 0 10px;
+}
+// .slick-list > div{
+//     margin: 0 -10px;
+// }
+.slick-arrow,
+.slick-next {
+  color: red;
+}

@@ -1,0 +1,152 @@
+.AllProduct {
+  width: 1370px;
+  margin: 0 auto;
+  .AllProduct_Title {
+    margin-top: 20px;
+    background-color: #f6f6f8;
+    padding-left: 20px;
+    height: 25px;
+    line-height: 25px;
+    color: #000;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+  }
+  .AllProduct_Header {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .AllProduct {
+    margin-top: 30px;
+    display: flex;
+    .AllProduct_Left {
+      width: 350px;
+      .AllProduct_Left_Price {
+        width: 300px;
+        margin: 0 auto;
+        .AllProduct_Left_Price_Title {
+          color: #000;
+          font-style: normal;
+          font-weight: 700;
+          line-height: 1.75;
+        }
+      }
+      .AllProduct_Left_Age {
+        width: 300px;
+        margin: 0 auto;
+        .AllProduct_Left_Age_Title {
+          color: #000;
+          font-style: normal;
+          font-weight: 700;
+          line-height: 1.75;
+        }
+        .AllProduct_Left_Age_Category {
+          .AllProduct_Left_Age_CategoryOne {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid rgb(228, 227, 227);
+          }
+        }
+      }
+      .AllProduct_Left_Gender {
+        width: 300px;
+        margin: 0 auto;
+        .AllProduct_Left_Gender_Title {
+          color: #000;
+          font-style: normal;
+          font-weight: 700;
+          line-height: 1.75;
+        }
+        .AllProduct_Left_Gender_Category {
+          .AllProduct_Left_Gender_CategoryOne {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid rgb(228, 227, 227);
+          }
+        }
+      }
+      .AllProduct_Left_Trademark {
+        width: 300px;
+        margin: 0 auto;
+        .AllProduct_Left_Trademark_Title {
+          color: #000;
+          font-style: normal;
+          font-weight: 700;
+          line-height: 1.75;
+        }
+        .AllProduct_Left_Trademark_Category {
+          .AllProduct_Left_Trademark_CategoryOne {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid rgb(228, 227, 227);
+          }
+        }
+      }
+    }
+    .AllProduct_Right {
+      display: flex;
+      width: 1020px;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      
+      .AllProduct_Right_ProductItem {
+        height: 430px;
+        width: 310px;
+        border: 1px solid #ccc;
+        overflow: hidden;
+        margin-bottom: 20px;
+        .AllProduct_Right_ProductItem_Image {
+          height: 313px;
+          width: 313px;
+          background: url('../../Assets/Images/AllProduct/1.jpg');
+          background-position: center center;
+          background-repeat: no-repeat;
+          background-size: cover;
+          &:hover {
+            height: 313px;
+            width: 313px;
+            background: url('../../Assets/Images/AllProduct/2.jpg');
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            transition: 0.5s;
+            cursor: pointer;
+          }
+        }
+        .AllProduct_Right_ProductItem_NameProduct {
+          color: black;
+          font-weight: 600;
+          font-size: 15px;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+          margin-top: 15px;
+          width: 300px;
+          margin: 0 auto;
+          height: 40px;
+
+          &:hover {
+            color: #df494a;
+            transition: 0.5s;
+            cursor: pointer;
+          }
+        }
+        .AllProduct_Right_ProductItem_ProductCode {
+          font-size: 10px;
+          color: #ccc;
+          margin-top: 5px;
+          margin-left: 10px;
+        }
+        .SpecialSale_ProductItem_Price {
+          color: #df494a;
+          font-size: 16px;
+          font-weight: 700;
+          margin-top: 5px;
+          margin-left: 10px;
+          height: 40px;
+        }
+      }
+    }
+  }
+}

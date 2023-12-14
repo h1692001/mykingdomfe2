@@ -1,0 +1,178 @@
+.Footer_Container {
+  width: 100%;
+  background: #efefef;
+  .Footer {
+    width: 1370px;
+    margin: 0 auto;
+  }
+  .Footer_Register {
+    .Footer_Register_Header {
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 18px;
+      padding: 20px 0 20px 0;
+    }
+    .Footer_LineTwo {
+      display: flex;
+      justify-content: space-between;
+      .Footer_Register_Input {
+        .Search_Input {
+          height: 40px;
+          width: 400px;
+          padding: 0 10px;
+          border: 1px solid #ccc;
+          box-sizing: border-box;
+          outline: none;
+          box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+          border: none;
+        }
+        .btn-search {
+          width: 80px;
+          height: 41px;
+          color: white;
+          font-size: 18px;
+          border-radius: none;
+          background-color: #ffd400;
+          border: none;
+          &:hover {
+            background-color: #df494a;
+            transition: 0.5s;
+            border: none;
+            cursor: pointer;
+          }
+        }
+      }
+      .Footer_Minitor {
+        display: flex;
+        .Footer_Minitor_Header {
+          font-size: 17px;
+          font-weight: 700;
+          line-height: 30px;
+          padding-right: 100px;
+        }
+        .Footer_Minitor_FB {
+          height: 32px;
+          width: 32px;
+          background: url('../../Assets/Images/Footer/facebook.png');
+          background-position: center center;
+          background-repeat: no-repeat;
+          background-size: cover;
+          margin: 0 10px;
+        }
+        .Footer_Minitor_INS {
+          height: 32px;
+          width: 32px;
+          background: url('../../Assets/Images/Footer/instagram.png');
+          background-position: center center;
+          background-repeat: no-repeat;
+          background-size: cover;
+          margin: 0 10px;
+        }
+        .Footer_Minitor_YT {
+          height: 32px;
+          width: 32px;
+          background: url('../../Assets/Images/Footer/youtube.png');
+          background-position: center center;
+          background-repeat: no-repeat;
+          background-size: cover;
+          margin: 0 10px;
+        }
+      }
+    }
+  }
+  .Footer_Content {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    .Footer_Hotline {
+      .Footer_Hotline_Header,
+      .Footer_Policy_Header,
+      .Footer_Support_Header,
+      .Footer_Address_Header {
+        font-size: 15px;
+        font-weight: 700;
+        line-height: 18px;
+      }
+      .Footer_Hotline_Content_PhoneNumber {
+        font-size: 35px;
+        color: red;
+        font-weight: 700;
+      }
+      .Footer_Hotline_Content {
+        font-style: italic;
+        font-size: 15px;
+        color: #444;
+      }
+      .Footer_Hotline_Content_Email {
+        i {
+          font-size: 25px;
+          padding-right: 15px;
+        }
+        span {
+          &:hover {
+            cursor: pointer;
+            color: #df494a;
+            transition: 0.5s;
+          }
+        }
+      }
+    }
+    .Footer_Policy {
+      .Footer_Policy_Header {
+        font-size: 15px;
+        font-weight: 700;
+        line-height: 18px;
+      }
+      .Footer_Policy_Content {
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 400;
+      }
+    }
+    .Footer_Support {
+      .Footer_Support_Header {
+        font-size: 15px;
+        font-weight: 700;
+        line-height: 18px;
+      }
+      .Footer_Support_Content {
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 400;
+      }
+      .Footer_Support_Image {
+        height: 56px;
+        width: 150px;
+        background: url('../../Assets/Images/Footer/I1.png');
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+    }
+    .Footer_Address {
+      .Footer_Address_Header {
+        font-size: 15px;
+        font-weight: 700;
+        line-height: 18px;
+      }
+      .Footer_Address_Image {
+        height: 170px;
+        width: 340px;
+        background: url('../../Assets/Images/Footer/I2.jpg');
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+    }
+  }
+  .Footer_NameCompany {
+    margin-top: 20px;
+    .Footer_NameCompany_Header,
+    .Footer_NameCompany_Address {
+      text-align: center;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 1.75;
+    }
+  }
+}

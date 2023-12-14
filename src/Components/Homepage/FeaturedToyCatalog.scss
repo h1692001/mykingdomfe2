@@ -1,0 +1,32 @@
+.FeaturedToyCatalog_Container {
+  width: 100%;
+  .FeaturedToyCatalog {
+    width: 1390px;
+    margin: 0 auto;
+
+    .Category {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      .FeaturedToyCatalog_Content {
+        width: 212px;
+        .FeaturedToyCatalog_Content_Image {
+          height: 212px;
+          width: 212px;
+          background-position: center center;
+          background-repeat: no-repeat;
+          background-size: cover;
+          border-radius: 10px;
+        }
+        .FeaturedToyCatalog_Content_Name {
+          text-align: center;
+          color: #444;
+          font-size: 16px;
+          font-weight: 500;
+          font-family: inherit;
+          margin-top: 5px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "name": "front-end",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
+    "@fortawesome/fontawesome-free": "^6.4.0",
+    "@fortawesome/fontawesome-free-webfonts": "^1.0.9",
+    "@fullcalendar/core": "^5.11.3",
+    "@fullcalendar/daygrid": "^5.11.3",
+    "@fullcalendar/interaction": "^5.11.3",
+    "@fullcalendar/list": "^5.11.3",
+    "@fullcalendar/react": "^5.11.2",
+    "@fullcalendar/timegrid": "^5.11.3",
+    "@reduxjs/toolkit": "^1.8.5",
+    "antd": "^5.11.3",
+    "axios": "^0.27.2",
+    "chart.js": "^3.9.1",
+    "font-awesome": "^4.7.0",
+    "fontawesome-4.7": "^4.7.0",
+    "formik": "^2.2.9",
+    "framer-motion": "^6.2.3",
+    "node-sass": "^6.0.0",
+    "quill": "^1.3.7",
+    "quill-image-resize": "^3.0.9",
+    "react": "^18.2.0",
+    "react-chartjs-2": "^5.2.0",
+    "react-dnd": "^16.0.1",
+    "react-dnd-html5-backend": "^16.0.1",
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.12.0",
+    "react-image-gallery": "^1.3.0",
+    "react-infinite-scroll-component": "^6.1.0",
+    "react-pro-sidebar": "^0.7.1",
+    "react-quill": "^2.0.0",
+    "react-rating-stars-component": "^2.2.0",
+    "react-redux": "^8.1.3",
+    "react-router-dom": "^6.16.0",
+    "react-scripts": "5.0.1",
+    "react-scroll-to-top": "^3.0.0",
+    "react-slick": "^0.29.0",
+    "react-stars": "^2.2.5",
+    "redux": "^4.2.1",
+    "redux-persist": "^6.0.0",
+    "redux-thunk": "^2.4.2",
+    "slick-carousel": "^1.8.1",
+    "styled-component": "^2.8.0",
+    "styled-components": "^6.0.8",
+    "sweetalert2": "^11.10.1",
+    "web-vitals": "^2.1.4",
+    "yup": "^0.32.11"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.3.5"
+  }
+}

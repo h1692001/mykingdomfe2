@@ -1,0 +1,71 @@
+.ToyManual_Container {
+  width: 100%;
+
+  .ToyManual {
+    width: 1370px;
+    margin: 0 auto;
+    .ToyManual_Header {
+      display: flex;
+      justify-content: space-between;
+      color: #444;
+      .ToyManual_Header_Title {
+        cursor: pointer;
+      }
+      .ToyManual_Header_Content {
+        height: 30px;
+        line-height: 30px;
+        background: #ccc;
+        margin: 5px 10px 0px 10px;
+        width: 150px;
+        text-align: center;
+        border-radius: 10px;
+        color: #444;
+        font-family: '' Helvetica Neue ',Helvetica,Arial,sans-serif';
+        font-weight: 700;
+        background-color: #f2f2f2;
+        font-size: 12px;
+        cursor: pointer;
+      }
+    }
+    .ToyManual_Content {
+      .ToyManual_ProductItem {
+        width: 440px;
+        height: 460px;
+        border: 1px solid #ccc;
+        overflow: hidden;
+        .ToyManual_Image {
+          height: 260px;
+          width: 437px;
+          background: url('../../Assets/Images/HomePage/ToyManual/I1.jpg');
+          background-position: center center;
+          background-repeat: no-repeat;
+          background-size: cover;
+        }
+        .ToyManual_ProductItem_NameProduct {
+          &:hover {
+            color: #df494a;
+            transition: 0.5s;
+            cursor: pointer;
+          }
+        }
+        .ToyManual_ProductItem_Content {
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+          overflow: hidden;
+
+          text-overflow: ellipsis;
+          margin-top: 14px;
+          color: #444;
+        }
+        .ToyManual_ProductItem_SeeMore {
+          text-align: center;
+          font-weight: 600;
+          margin-top: 20px;
+          text-decoration: underline;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

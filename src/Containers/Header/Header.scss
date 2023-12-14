@@ -1,0 +1,174 @@
+.Header_One_Container {
+  height: 25px;
+  background: #3e4999;
+  width: 100%;
+  .Header_One {
+    display: flex;
+    width: 1200px;
+    justify-content: space-between;
+    margin: 0 auto;
+    .Header_One_Left {
+      display: flex;
+      line-height: 25px;
+      cursor: pointer;
+      .Header_One_Left_Text {
+        color: #fff;
+        font-weight: 700;
+        font-size: 14px;
+        margin-left: 3px;
+      }
+    }
+    .Header_One_Right {
+      display: flex;
+      line-height: 25px;
+      &:hover {
+        cursor: pointer;
+        color: red;
+        transition: 0.5s;
+      }
+      .Header_One_Right_Icon {
+        color: #fff;
+      }
+      .Header_One_Right_Text {
+        color: #fff;
+        font-weight: 700;
+        font-size: 14px;
+        margin-left: 3px;
+      }
+    }
+  }
+}
+.Header_Two_Container {
+  width: 100%;
+  height: 100px;
+  .Header_Two {
+    width: 1200px;
+    height: 100%;
+    margin: 0 auto;
+    justify-content: space-between;
+    display: flex;
+    line-height: 100px;
+    align-items: center;
+    .Header_Two_Logo {
+      height: 60px;
+      width: 200px;
+      background: url('../../Assets/Images/logo.png');
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      margin-top: 20px;
+    }
+    .Header_Two_Search {
+      .Search_Input {
+        height: 40px;
+        width: 450px;
+        padding: 0 10px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        outline: none;
+        box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+      }
+      .btn-search {
+        width: 100px;
+        height: 40px;
+        background: #f7f9fa;
+        border: 1px solid #e9ebee;
+        color: #f04e45;
+        font-size: 18px;
+        box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+      }
+    }
+    .Header_Two_Content {
+      display: flex;
+
+      .Header_Two_Content_Membership,
+      .Header_Two_Content_Account,
+      .Header_Two_Content_Cart {
+        display: flex;
+        margin: 0 3px;
+      }
+      .Header_Two_Content_Membership_Text,
+      .Header_Two_Content_Account_Text,
+      .Header_Two_Content_Cart_Text {
+        font-size: 14px;
+        margin: 0 10px;
+        color: #444;
+        font-weight: 600;
+      }
+      .Header_Two_Content_Account {
+        &:hover {
+          cursor: pointer;
+        }
+        .Header_Two_Content_Account_Text {
+          .Account {
+            position: relative;
+          }
+          ul {
+            position: absolute;
+            margin-top: -30px;
+            margin-left: -70px;
+            li {
+              width: 180px;
+              list-style-type: none;
+              padding-top: 0;
+              height: 45px;
+              line-height: 45px;
+              border-bottom: 1px solid #eee;
+              padding-left: 10px;
+              background: white;
+              color: #000;
+              box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+              font-style: normal;
+              font-weight: 400;
+              &:hover {
+                cursor: pointer;
+                color: #f04e45;
+                transition: 0.5s;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.Main_Menucontent_Container {
+  height: 35px;
+  background: #f04e47;
+  width: 100%;
+  z-index: 100;
+  .Main_Menucontent {
+    width: 1300px;
+    margin: 0 auto;
+    justify-content: start;
+    gap: 60px;
+    display: flex;
+    line-height: 35px;
+    .New_Product,
+    .Product,
+    .Gender,
+    .Age,
+    .TradeMark,
+    .Promotion,
+    .Outstanding_Campaign,
+    .Member_Incentives,
+    .Handbook {
+      span {
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 600;
+        color: #fff;
+      }
+    }
+  }
+}
+
+//Mobile: width < 740px
+@media only screen and (max-width: 46.1875em) {
+}
+//Tablet: width >=740px and width < 1024px
+@media only screen and (min-width: 46.25em) and (max-width: 63.9375em) {
+  .Main_Menucontent_Container {
+    display: none;
+  }
+}
