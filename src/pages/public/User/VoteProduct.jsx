@@ -1,15 +1,22 @@
-import { Breadcrumb, Layout, Menu, theme } from 'antd';
-import { useEffect, useState } from 'react';
+import { Breadcrumb, Layout, Menu, theme, Text } from 'antd';
+import { useEffect, useState, useRef } from 'react';
 import { Space, Table, Spin, Button, Modal, Input, Select, InputNumber } from 'antd';
 import BillApi from "../../../api/BillApi";
 import ProductApi from "../../../api/ProductApi";
 import { useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
+import ReactStars from 'react-stars';
+import { FaRegStar, FaStar } from 'react-icons/fa6';
+import TextArea from 'antd/es/input/TextArea';
+
+
 const VoteProduct = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [data, setData] = useState([]);
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [votes, setVotes] = useState({});
+    const [vote, setVote] = useState({});
+    const [comment, setComment] = useState({});
+    const [isShowModaL, setIsShowModal] = useState(false);
+    const [currentProduct, setCurrentProduct] = useState();
     const { userCurrent } = useSelector(state => state.auth);
     const fetchData = async () => {
         try {
@@ -25,9 +32,6 @@ const VoteProduct = () => {
         } catch (e) {
             setIsLoading(false);
         }
-    }
-    const handleVoteChange = (productId, value) => {
-        setVotes(prevVotes => ({ ...prevVotes, [productId]: value }));
     }
 
     useEffect(() => {
@@ -61,34 +65,15 @@ const VoteProduct = () => {
             title: 'Đánh giá',
             key: 'vote',
             render: (_, record) => {
-                const productId = record.productDTO.id;
-                const voteValue = votes[productId] || 1;
                 return (
                     <Space size="middle">
-                        <InputNumber min={1} max={5} defaultValue={1}
-                            value={voteValue}
-                            onChange={(value) => handleVoteChange(productId, value)}
 
-                            style={{ display: 'block' }} />
                         <Button type="primary" style={{
                             backgroundColor: "green !important"
-
                         }}
                             onClick={async () => {
-                                try {
-                                    const res = await ProductApi.voteProduct({
-                                        id: record.id,
-                                        vote: votes[productId],
-                                        productDTO: {
-                                            id: record.productDTO.id
-                                        }
-                                    });
-                                    fetchData();
-                                    Swal.fire("Yeah!", "Đã đánh giá sản phẩm thành công", 'success')
-                                } catch (e) {
-                                    Swal.fire("Oops!", "Có lỗi xảy ra! Thử lại sau", 'error')
-
-                                }
+                                setIsShowModal(true);
+                                setCurrentProduct(record);
                             }} >Đánh giá</Button>
 
                     </Space >
@@ -96,7 +81,7 @@ const VoteProduct = () => {
             },
         },
     ];
-
+    console.log(currentProduct);
     return <>
         <Spin spinning={isLoading}>
             <div style={{
@@ -115,6 +100,31 @@ const VoteProduct = () => {
                 }} />
             </div>
         </Spin>
+        <Modal title="Đánh giá sản phẩm" open={isShowModaL} onOk={async () => {
+            try {
+                setIsLoading(true);
+                await ProductApi.voteProduct({
+                    ...currentProduct,
+                    vote: vote,
+                    contentVote: comment
+                });
+                setIsLoading(false);
+                fetchData();
+                setIsShowModal(false);
+                setComment();
+                setVote();
+            }
+            catch (e) {
+
+            }
+        }} onCancel={() => { setIsShowModal(false) }}>
+            <Spin spinning={isLoading}>
+                <ReactStars count={5} size={24} value={vote} emptyIcon={<FaRegStar></FaRegStar>} fullIcon={<FaStar></FaStar>} activeColor="#f04e45" onChange={(e) => {
+                    setVote(e);
+                }} />
+                <TextArea placeholder='Nhận xét' style={{ marginTop: '10px' }} onChange={(e) => { setComment(e.target.value) }}></TextArea>
+            </Spin>
+        </Modal>
     </>
 }
 

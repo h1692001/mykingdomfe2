@@ -48,7 +48,7 @@ const DetailProduct = () => {
   }, [params]);
   const checkFavourite = async () => {
     try {
-      console.log(userCurrent);
+
       const res3 = await ProductApi.checkFavourite(userCurrent?.id, product.id);
       if (res3 === 'ok') {
         setIsFavourite(true);
@@ -80,6 +80,15 @@ const DetailProduct = () => {
       checkFavourite();
     } catch (e) { }
   };
+  function formatDateToCustomString(date) {
+    var year = date.getFullYear();
+    var month = ('0' + (date.getMonth() + 1)).slice(-2);
+    var day = ('0' + date.getDate()).slice(-2);
+    var hours = ('0' + date.getHours()).slice(-2);
+    var minutes = ('0' + date.getMinutes()).slice(-2);
+
+    return year + '-' + month + '-' + day + ' ' + hours + ':' + minutes;
+  }
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -90,7 +99,10 @@ const DetailProduct = () => {
           </div>
           <div className="px-[10px]">
             <p style={{ fontSize: '18px', marginBottom: '5px', fontWeight: '500' }}>{product?.name}</p>
-            <ReactStars count={5} size={24} value={product?.vote} edit={false} emptyIcon={<FaRegStar></FaRegStar>} fullIcon={<FaStar></FaStar>} activeColor="#f04e45" />
+            <div className='flex items-center gap-[10px]'>
+              <ReactStars count={5} size={24} value={product?.vote} edit={false} emptyIcon={<FaRegStar></FaRegStar>} fullIcon={<FaStar></FaStar>} activeColor="#f04e45" />
+              <p className='text-[12px]' style={{ fontSize: '14px' }}>{product?.feedbacks.length} lượt đánh giá</p>
+            </div>
 
             <div className="flex gap-[50px]" style={{ gap: '50px', marginBottom: '10px' }}>
               <p>
@@ -130,15 +142,18 @@ const DetailProduct = () => {
               </div>
             </div>
 
-            <InputNumber
-              min={1}
-              max={product?.amount}
-              defaultValue={1}
-              onChange={(e) => {
-                setAmount(e);
-              }}
-              style={{ display: 'block' }}
-            />
+            <div className='flex gap-[10px] items-center'>
+              <InputNumber
+                min={1}
+                max={product?.amount}
+                defaultValue={1}
+                onChange={(e) => {
+                  setAmount(e);
+                }}
+                style={{ display: 'block' }}
+              />
+              <p style={{ fontSize: '14px' }}>Số lượng: {product?.amount}</p>
+            </div>
             <div className="flex items-center" style={{ gap: '30px' }}>
               <div
                 style={{ marginTop: '10px', backgroundColor: '#df494a', fontWeight: '500', display: 'inline-block', color: 'white', borderRadius: '8px', padding: '6px 5px' }}
@@ -218,6 +233,23 @@ const DetailProduct = () => {
           </table>
         </div>
 
+        <div>
+          <p style={{ color: '#222', fontSize: '16px', fontWeight: '500', marginBottom: '10px' }}>Đánh giá sản phẩm</p>
+          {product?.feedbacks?.map(fb => {
+            return <div key={Math.random()} className='flex gap-[20px] my-[20px]'>
+              <div>
+                <img src={fb?.getUserResponse?.avatar} alt="cascsc" style={{ height: '40px', width: '40px', borderRadius: '50%' }}></img>
+              </div>
+              <div>
+                <p style={{ fontSize: '14px', fontWeight: '500' }}> {fb?.getUserResponse?.fullname}</p>
+                <ReactStars count={5} size={20} value={fb?.vote} edit={false} emptyIcon={<FaRegStar></FaRegStar>} fullIcon={<FaStar></FaStar>} activeColor="#f04e45" />
+                <p style={{ fontSize: '12px' }}>{formatDateToCustomString(new Date(fb?.createdAt))}</p>
+                <p style={{ fontSize: '14px', marginTop: '10px' }}>{fb?.content}</p>
+              </div>
+            </div>
+          })}
+        </div>
+
         <div style={{ marginTop: '20px', marginBottom: '30px' }}>
           <p style={{ color: '#222', fontSize: '16px', fontWeight: '500', marginBottom: '10px' }}>Có thể bạn sẽ thích</p>
           <div className="SpecialSale_Container">
@@ -227,7 +259,7 @@ const DetailProduct = () => {
                   {otherProduct.map((dt) => {
                     if (dt.id !== product?.id) {
                       return (
-                        <div className="SpecialSale_ProductItem" key={dt.id}>
+                        <Link to={'/detailProduct/' + dt.id} className="SpecialSale_ProductItem" key={dt.id}>
                           <div
                             className="SpecialSale_ProductItem_Image"
                             style={{
@@ -244,7 +276,7 @@ const DetailProduct = () => {
                               <div style={{ color: '#444', fontSize: '12px', textDecorationLine: 'line-through', textDecorationStyle: 'solid', fontWeight: '600' }}>{formatCurrency(dt.price)} VNĐ</div>
                             </div>
                           </div>
-                        </div>
+                        </Link>
                       );
                     }
                   })}

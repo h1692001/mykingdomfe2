@@ -4,12 +4,19 @@ import { Space, Table, Spin, Button, Modal, Input, List, Divider, Avatar } from 
 import InfiniteScroll from 'react-infinite-scroll-component';
 import BillApi from "../../../api/BillApi";
 import { useSelector } from 'react-redux';
+import { Page, Text, View, Document, StyleSheet, Font } from '@react-pdf/renderer';
+import { PDFDownloadLink } from '@react-pdf/renderer';
+import { formatCurrency } from '../../../utils/convertPrice';
+import HoaDon from './HoaDOn';
+
 const BillHistory = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [data, setData] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [billDetail, setBillDetail] = useState();
     const { userCurrent } = useSelector(state => state.auth);
+    const [isShowPdf, setIsShowPdf] = useState(false);
+    const [currentPdf, setCurrentPdf] = useState({});
 
     const fetchData = async () => {
         try {
@@ -80,7 +87,7 @@ const BillHistory = () => {
             title: 'Action',
             key: 'action',
             render: (_, record) => {
-
+                console.log(record);
                 return (
                     <Space size="middle">
                         <Button type="primary" style={{
@@ -90,12 +97,28 @@ const BillHistory = () => {
                                 setIsModalOpen(true)
                                 setBillDetail(record)
                             }}>Xem chi tiết</Button>
+                        {record.status === "COMPLETED" && <Button type="primary" style={{
+                            backgroundColor: "green !important"
+                        }}
+                            onClick={() => {
+                                setIsShowPdf(true)
+                                setCurrentPdf(record)
+                            }}>Xuất hóa đơn</Button>}
                     </Space >
                 )
             },
         },
     ];
-    console.log(billDetail);
+    function formatDateToCustomString(date) {
+        var year = date.getFullYear();
+        var month = ('0' + (date.getMonth() + 1)).slice(-2);
+        var day = ('0' + date.getDate()).slice(-2);
+        var hours = ('0' + date.getHours()).slice(-2);
+        var minutes = ('0' + date.getMinutes()).slice(-2);
+
+        return year + '-' + month + '-' + day + ' ' + hours + ':' + minutes;
+    }
+    console.log(currentPdf);
     return <>
         <Spin spinning={isLoading}>
             <div style={{
@@ -181,6 +204,33 @@ const BillHistory = () => {
 
             </Spin>
         </Modal>
+
+        <Modal title="Hóa đơn" open={isShowPdf} okText={<PDFDownloadLink document={<HoaDon currentPdf={currentPdf}></HoaDon>} fileName='HoaDon.pdf' > Tải hóa đơn</PDFDownloadLink>} onCancel={() => { setIsShowPdf(false); setCurrentPdf({}) }}>
+            <Document>
+                <Page style={{
+                    paddingTop: "35px",
+                    paddingBottom: "65px",
+                    paddingHorizontal: "35px",
+                }}>
+                    <Text style={{ display: 'block' }}> Tên người nhận: {currentPdf?.name}</Text>
+                    <Text style={{ display: 'block' }}> Địa chỉ: {currentPdf?.address}</Text>
+                    <Text style={{ display: 'block' }}> Ngày thanh toán: {formatDateToCustomString(new Date(currentPdf?.createdAt))}</Text>
+                    <Text style={{ display: 'block', marginTop: '10px', fontWeight: '500' }}> Danh sách sản phẩm: </Text>
+                    {currentPdf?.billItemDTOS?.map(dt => {
+                        return <Text style={{ margin: '10px 0' }}>
+                            <p>{dt.productDTO.name}</p>
+                            <div className='flex gap-[12px]' style={{ gap: '12px', fontSize: '12px' }}>
+                                <p>Số lượng: {dt.amount}</p>
+                                <p>Thành tiền: {formatCurrency(dt?.price)}VND</p>
+                            </div>
+                        </Text>
+                    })}
+                    <Text style={{ marginTop: '20px', fontWeight: '500' }}>Tổng tiền: {formatCurrency(currentPdf?.billItemDTOS?.reduce((acc, val) => acc += val.price, 0))} VND</Text>
+
+                </Page>
+            </Document>
+
+        </Modal >
     </>
 }
 
