@@ -12,6 +12,10 @@ const SaleApi = {
     const url = `/sale`;
     return axiosClients.get(url);
   },
+  delete: (id) => {
+    const url = `/sale?saleId=${id}`;
+    return axiosClients.delete(url);
+  },
 };
 
 export default SaleApi;

@@ -45,17 +45,56 @@ const ManageBrand = () => {
         {
             title: '',
             key: 'action',
-            render: (_, record) => (
-                <Space size="middle">
-                    <Button type="primary" style={{
-                        backgroundColor: "green !important"
-                    }}
-                        onClick={() => {
-                            setEditProduct(record);
-                            setIsModalOpenEdit(true);
-                        }}>Chỉnh sửa</Button>
-                </Space>
-            ),
+            render: (_, record) => {
+                console.log(record);; return (
+                    <Space size="middle">
+                        <Button type="primary" style={{
+                            backgroundColor: "green !important"
+                        }}
+                            onClick={() => {
+                                setEditProduct(record);
+                                setIsModalOpenEdit(true);
+                            }}>Chỉnh sửa</Button>
+
+                        {record.hidden === false ?
+                            <Button type="error" style={{
+                                backgroundColor: "red !important",
+                                color: "white"
+                            }}
+                                onClick={async () => {
+                                    try {
+                                        setIsLoading(true);
+                                        await BrandApi.disablebrand(record.id)
+                                        Swal.fire("Yeah!", "Đã ẩn nhãn hàng thành công", 'success');
+                                        fetchData();
+                                        setIsLoading(false);
+                                    }
+                                    catch (e) {
+                                        setIsLoading(false);
+                                        Swal.fire("Oops!", 'Có lỗi xảy ra! Thử lại sau', "error");
+
+                                    }
+                                }}>Ẩn nhãn hàng</Button> : <Button type="primary" style={{
+                                    backgroundColor: "red !important",
+                                    color: "white"
+                                }}
+                                    onClick={async () => {
+                                        try {
+                                            setIsLoading(true);
+                                            await BrandApi.enablebrand(record.id)
+                                            Swal.fire("Yeah!", "Đã hiện nhãn hàng thành công", 'success');
+                                            fetchData();
+                                            setIsLoading(false);
+                                        }
+                                        catch (e) {
+                                            setIsLoading(false);
+                                            Swal.fire("Oops!", 'Có lỗi xảy ra! Thử lại sau', "error");
+
+                                        }
+                                    }}>Hiện nhãn hàng</Button>}
+                    </Space>
+                )
+            },
         },
     ];
 
@@ -73,7 +112,7 @@ const ManageBrand = () => {
         try {
             setIsLoading(true);
             const res = await BrandApi.getAllBrand();
-            console.log(res);
+
             const res2 = await CategoryApi.getAllCategory();
             setData(res);
             const categoryOption = [];

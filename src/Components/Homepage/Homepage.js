@@ -28,7 +28,6 @@ export default function Homepage() {
     fetchCategory();
   }, []);
   const { cart } = useSelector((state) => state.cart);
-  console.log(cart);
   return (
     <div>
       <Carousel autoplay autoplaySpeed={3000}>
@@ -44,12 +43,14 @@ export default function Homepage() {
       <FeaturedToyCatalog />
 
       {category.map((cate, i) => {
-        return (
-          <>
-            <div style={{ marginTop: '50px' }} key={cate.id}></div>
-            <Lego cate={cate} />
-          </>
-        );
+        if (cate?.hidden === false) {
+          return (
+            <>
+              <div style={{ marginTop: '50px' }} key={cate.id}></div>
+              <Lego cate={cate} />
+            </>
+          );
+        }
       })}
       <div style={{ marginTop: '50px' }}></div>
       <ToyManual />

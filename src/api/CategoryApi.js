@@ -12,6 +12,14 @@ const CategoryApi = {
     const url = '/category';
     return axiosClients.put(url, data);
   },
+  disableCategory: (data) => {
+    const url = '/category/disable?categoryId=' + data;
+    return axiosClients.get(url, data);
+  },
+  enableCategory: (data) => {
+    const url = '/category/enable?categoryId=' + data;
+    return axiosClients.get(url, data);
+  },
 };
 
 export default CategoryApi;

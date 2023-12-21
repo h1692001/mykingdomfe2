@@ -58,14 +58,52 @@ const ManageCategory = () => {
         {
             title: '',
             key: 'action',
-            render: (_, record) => (
-                <Space size="middle">
-                    <Button type="primary" style={{
-                        backgroundColor: "green !important"
-                    }}
-                        onClick={() => { setIsModalEditOpen(true); setEditData(record) }}>Chỉnh sửa</Button>
-                </Space>
-            ),
+            render: (_, record) => {
+                console.log(record); return (
+                    <Space size="middle">
+                        <Button type="primary" style={{
+                            backgroundColor: "green !important"
+                        }}
+                            onClick={() => { setIsModalEditOpen(true); setEditData(record) }}>Chỉnh sửa</Button>
+                        {record.hidden === false ?
+                            <Button type="error" style={{
+                                backgroundColor: "red !important",
+                                color: "white"
+                            }}
+                                onClick={async () => {
+                                    try {
+                                        setIsLoading(true);
+                                        await CategoryApi.disableCategory(record.id)
+                                        Swal.fire("Yeah!", "Đã ẩn danh mục thành công", 'success');
+                                        fetchData();
+                                        setIsLoading(false);
+                                    }
+                                    catch (e) {
+                                        setIsLoading(false);
+                                        Swal.fire("Oops!", 'Có lỗi xảy ra! Thử lại sau', "error");
+
+                                    }
+                                }}>Ẩn danh mục</Button> : <Button type="primary" style={{
+                                    backgroundColor: "red !important",
+                                    color: "white"
+                                }}
+                                    onClick={async () => {
+                                        try {
+                                            setIsLoading(true);
+                                            await CategoryApi.enableCategory(record.id)
+                                            Swal.fire("Yeah!", "Đã hiện danh mục thành công", 'success');
+                                            fetchData();
+                                            setIsLoading(false);
+                                        }
+                                        catch (e) {
+                                            setIsLoading(false);
+                                            Swal.fire("Oops!", 'Có lỗi xảy ra! Thử lại sau', "error");
+
+                                        }
+                                    }}>Hiện danh mục</Button>}
+                    </Space>
+                )
+            },
         },
     ];
 

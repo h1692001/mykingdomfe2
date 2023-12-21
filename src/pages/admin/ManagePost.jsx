@@ -3,6 +3,7 @@ import { Button, Space, Spin, Table } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import PostApi from "../../api/PostApi";
+import Swal from "sweetalert2";
 const ManagePost = () => {
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
@@ -61,6 +62,22 @@ const ManagePost = () => {
                         onClick={() => {
                             navigate('/admin/updatePost/' + record.id)
                         }}>Chỉnh sửa</Button>
+                    <Button type="error" style={{
+                        backgroundColor: "red !important",
+                        color: "white"
+                    }}
+                        onClick={async () => {
+                            try {
+                                setIsLoading(true);
+                                await PostApi.delete(record.id)
+                                Swal.fire("Yeah!", "Đã xóa bài đăng thành công", 'success');
+                                fetchPost();
+                                setIsLoading(false);
+                            }
+                            catch (e) {
+                                setIsLoading(false);
+                            }
+                        }}>Xóa bài</Button>
                 </Space>
             ),
         },

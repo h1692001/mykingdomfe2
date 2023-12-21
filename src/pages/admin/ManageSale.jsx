@@ -65,6 +65,25 @@ const ManageSale = () => {
                             setEditProduct(record);
                             setIsModalOpenEdit(true);
                         }}>Chỉnh sửa</Button>
+
+                    <Button type="error" style={{
+                        backgroundColor: "red !important",
+                        color: "white"
+                    }}
+                        onClick={async () => {
+                            try {
+                                setIsLoading(true);
+                                await SaleApi.delete(record.id)
+                                Swal.fire("Yeah!", "Đã xóa đợt sale thành công", 'success');
+                                fetchData();
+                                setIsLoading(false);
+                            }
+                            catch (e) {
+                                setIsLoading(false);
+                                Swal.fire("Oops!", 'Có lỗi xảy ra! Thử lại sau', "error");
+
+                            }
+                        }}>Xóa đợt sale</Button>
                 </Space>
             ),
         },

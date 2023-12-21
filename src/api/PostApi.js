@@ -16,6 +16,10 @@ const PostApi = {
     const url = `/post/getById?id=${id}`;
     return axiosClients.get(url);
   },
+  delete: (id) => {
+    const url = `/post?postId=${id}`;
+    return axiosClients.delete(url);
+  },
 };
 
 export default PostApi;

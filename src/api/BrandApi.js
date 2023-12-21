@@ -20,6 +20,14 @@ const BrandApi = {
       },
     });
   },
+  disablebrand: (data) => {
+    const url = '/brand/disable?brandId=' + data;
+    return axiosClients.get(url, data);
+  },
+  enablebrand: (data) => {
+    const url = '/brand/enable?brandId=' + data;
+    return axiosClients.get(url, data);
+  },
 };
 
 export default BrandApi;

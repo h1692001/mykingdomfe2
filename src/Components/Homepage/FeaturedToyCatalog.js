@@ -18,7 +18,7 @@ export default function FeaturedToyCatalog() {
         <h2 style={{ color: '#444', fontSize: '25px', fontWeight: '600', margin: '20px 0' }}>DANH MỤC ĐỒ CHƠI NỔI BẬT</h2>
         <div className="Category">
           {data.map((cate, i) => {
-            if (i < 6) {
+            if (i < 6 && cate?.hidden === false) {
               return (
                 <div className="FeaturedToyCatalog_Content" key={cate.id}>
                   <div className="FeaturedToyCatalog_Content_Image" style={{ backgroundImage: `url(${cate.image})` }}></div>
