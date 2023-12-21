@@ -3,7 +3,10 @@ import { useEffect, useState } from 'react';
 import BillApi from '../../api/BillApi';
 import { Space, Table, Spin, Button, Modal, Input, List, Select, Avatar } from 'antd';
 import InfiniteScroll from 'react-infinite-scroll-component';
-
+import { Page, Text, View, Document, StyleSheet, Font } from '@react-pdf/renderer';
+import { PDFDownloadLink } from '@react-pdf/renderer';
+import { formatCurrency } from '../../utils/convertPrice';
+import HoaDon from '../public/User/HoaDOn';
 import Swal from 'sweetalert2';
 const { Header } = Layout;
 const ManageBill = () => {
@@ -11,6 +14,8 @@ const ManageBill = () => {
     const [data, setData] = useState([]);
     const [billDetail, setBillDetail] = useState();
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isShowPdf, setIsShowPdf] = useState(false);
+    const [currentPdf, setCurrentPdf] = useState({});
     const changeStatus = async (id, status) => {
         try {
             setIsLoading(true);
@@ -136,11 +141,28 @@ const ManageBill = () => {
                                     changeStatus(record.id, "COMPLETED");
                                 }}>{"Hoàn thành"}</Button>
                         }
+                        {record.status === "COMPLETED" && <Button type="primary" style={{
+                            backgroundColor: "green !important"
+                        }}
+                            onClick={() => {
+                                setIsShowPdf(true)
+                                setCurrentPdf(record)
+                            }}>Xuất hóa đơn</Button>}
                     </Space>
                 )
             },
         },
     ];
+
+    function formatDateToCustomString(date) {
+        var year = date.getFullYear();
+        var month = ('0' + (date.getMonth() + 1)).slice(-2);
+        var day = ('0' + date.getDate()).slice(-2);
+        var hours = ('0' + date.getHours()).slice(-2);
+        var minutes = ('0' + date.getMinutes()).slice(-2);
+
+        return year + '-' + month + '-' + day + ' ' + hours + ':' + minutes;
+    }
     return <>
         <Header
             style={{
@@ -240,6 +262,32 @@ const ManageBill = () => {
 
             </Spin>
         </Modal>
+        <Modal title="Hóa đơn" open={isShowPdf} okText={<PDFDownloadLink document={<HoaDon currentPdf={currentPdf}></HoaDon>} fileName='HoaDon.pdf' > Tải hóa đơn</PDFDownloadLink>} onCancel={() => { setIsShowPdf(false); setCurrentPdf({}) }}>
+            <Document>
+                <Page style={{
+                    paddingTop: "35px",
+                    paddingBottom: "65px",
+                    paddingHorizontal: "35px",
+                }}>
+                    <Text style={{ display: 'block' }}> Tên người nhận: {currentPdf?.name}</Text>
+                    <Text style={{ display: 'block' }}> Địa chỉ: {currentPdf?.address}</Text>
+                    <Text style={{ display: 'block' }}> Ngày thanh toán: {formatDateToCustomString(new Date(currentPdf?.createdAt))}</Text>
+                    <Text style={{ display: 'block', marginTop: '10px', fontWeight: '500' }}> Danh sách sản phẩm: </Text>
+                    {currentPdf?.billItemDTOS?.map(dt => {
+                        return <Text style={{ margin: '10px 0' }}>
+                            <p>{dt.productDTO.name}</p>
+                            <div className='flex gap-[12px]' style={{ gap: '12px', fontSize: '12px' }}>
+                                <p>Số lượng: {dt.amount}</p>
+                                <p>Thành tiền: {formatCurrency(dt?.price)}VND</p>
+                            </div>
+                        </Text>
+                    })}
+                    <Text style={{ marginTop: '20px', fontWeight: '500' }}>Tổng tiền: {formatCurrency(currentPdf?.billItemDTOS?.reduce((acc, val) => acc += val.price, 0))} VND</Text>
+
+                </Page>
+            </Document>
+
+        </Modal >
     </>
 }
 

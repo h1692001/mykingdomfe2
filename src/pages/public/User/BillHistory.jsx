@@ -97,13 +97,13 @@ const BillHistory = () => {
                                 setIsModalOpen(true)
                                 setBillDetail(record)
                             }}>Xem chi tiết</Button>
-                        {record.status === "COMPLETED" && <Button type="primary" style={{
+                        {/* {record.status === "COMPLETED" && <Button type="primary" style={{
                             backgroundColor: "green !important"
                         }}
                             onClick={() => {
                                 setIsShowPdf(true)
                                 setCurrentPdf(record)
-                            }}>Xuất hóa đơn</Button>}
+                            }}>Xuất hóa đơn</Button>} */}
                     </Space >
                 )
             },
@@ -118,7 +118,7 @@ const BillHistory = () => {
 
         return year + '-' + month + '-' + day + ' ' + hours + ':' + minutes;
     }
-    console.log(currentPdf);
+
     return <>
         <Spin spinning={isLoading}>
             <div style={{
